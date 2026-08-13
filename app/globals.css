@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #faf7f1;
+  --bg-card: #ffffff;
+  --ink: #2a2119;
+  --ink-soft: #6b5f52;
+  --ink-faint: #9c9184;
+
+  --gold: #a9812f;
+  --gold-light: #c9a24a;
+  --gold-soft: #f5ecd8;
+  --border: #e9e0cf;
+
+  --s-available-bg: #eef7ee;
+  --s-available-tx: #2f6b3a;
+  --s-used-bg: #eef2fb;
+  --s-used-tx: #33478f;
+  --s-maintenance-bg: #f4f1ea;
+  --s-maintenance-tx: #7a6f5e;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-card: var(--bg-card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-soft: var(--gold-soft);
+  --color-border: var(--border);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
