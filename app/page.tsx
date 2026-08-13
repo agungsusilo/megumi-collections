@@ -1,11 +1,17 @@
 import Image from "next/image";
 import CollectionGallery from "@/components/collection-gallery";
-import { getCollectionItems } from "@/lib/collection";
+import FeaturedSection from "@/components/featured-section";
+import { getCollectionItems, getFeaturedCollectionItems } from "@/lib/collection";
+import { getFeaturedCatalogCount } from "@/lib/settings";
 
 export const revalidate = 120;
 
 export default async function Home() {
-  const items = await getCollectionItems();
+  const featuredCount = await getFeaturedCatalogCount();
+  const [items, featuredItems] = await Promise.all([
+    getCollectionItems(),
+    getFeaturedCollectionItems(featuredCount),
+  ]);
 
   return (
     <div className="flex-1 flex flex-col">
@@ -28,6 +34,8 @@ export default async function Home() {
           </p>
         </div>
       </header>
+
+      <FeaturedSection items={featuredItems} />
 
       <main className="mx-auto w-full max-w-6xl px-4 py-8 flex-1">
         <CollectionGallery items={items} />
