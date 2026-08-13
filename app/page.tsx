@@ -8,31 +8,33 @@ export default async function Home() {
   const items = await getCollectionItems();
 
   return (
-    <div className="flex-1">
-      <header className="border-b border-[var(--border)] bg-[var(--bg-card)]">
-        <div className="mx-auto max-w-6xl px-4 py-10 flex flex-col items-center text-center sm:py-14">
-          <Image
-            src="/megumi-logo.png"
-            alt="Megumi Beauty Studio"
-            width={140}
-            height={140}
-            className="mb-4"
-            priority
-          />
+    <div className="flex-1 flex flex-col">
+      <nav className="border-b border-[var(--border)] bg-[var(--bg-card)]">
+        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-3">
+          <Image src="/megumi-logo.png" alt="Megumi Beauty Studio" width={40} height={40} priority />
+          <div className="leading-tight">
+            <p className="font-display text-sm font-semibold tracking-wide">MEGUMI BEAUTY STUDIO</p>
+            <p className="text-[11px] text-[var(--ink-faint)]">Makeup • Attire • Accessories</p>
+          </div>
+        </div>
+      </nav>
+
+      <header className="bg-[var(--bg-card)] border-b border-[var(--border)]">
+        <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10 text-center">
           <h1 className="font-display text-3xl sm:text-4xl">Koleksi Baju</h1>
-          <p className="mt-2 max-w-md text-sm text-[var(--ink-soft)]">
+          <p className="mt-2 max-w-md mx-auto text-sm text-[var(--ink-soft)]">
             Gaun, kebaya, busana adat, dan aksesoris rental dari Megumi Beauty Studio.
-            Sentuh salah satu item untuk melihat detailnya.
+            Pilih salah satu item untuk melihat detailnya.
           </p>
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 py-10">
+      <main className="mx-auto w-full max-w-6xl px-4 py-8 flex-1">
         <CollectionGallery items={items} />
       </main>
 
       <footer className="border-t border-[var(--border)] py-8 text-center text-xs text-[var(--ink-faint)]">
-        Megumi Beauty Studio — Makeup • Attire • Accessories
+        © {new Date().getFullYear()} Megumi Beauty Studio — Makeup • Attire • Accessories
       </footer>
     </div>
   );
