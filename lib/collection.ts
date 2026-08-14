@@ -6,6 +6,10 @@ const STORAGE_PREFIX = "storage:";
 const SELECT_COLUMNS =
   "id, kategori_baju, foto_baju, jumlah, nama_baju, jenis_model, warna, ukuran, status, butuh_perbaikan, updated_at, created_at";
 
+// This site is for outfit rental only — hide underlayer/accessory categories
+// that aren't rented out on their own, keep the focus on actual garments.
+const HIDDEN_CATEGORIES = new Set(["Manset", "Kerudung/Jilbab", "Longtorso"]);
+
 function resolveImageUrl(value: string) {
   if (!value) return "";
   if (!value.startsWith(STORAGE_PREFIX)) return value;
@@ -19,7 +23,15 @@ function resolveImageUrl(value: string) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isDisplayable(row: any) {
-  return row.status !== "Rusak" && !row.butuh_perbaikan;
+  return row.status !== "Rusak" && !row.butuh_perbaikan && !HIDDEN_CATEGORIES.has(row.kategori_baju);
+}
+
+// Featured items are an explicit admin choice — trust it even if the item is
+// mid-repair (butuh_perbaikan), only hide items that are truly damaged (Rusak)
+// or fall in a category this site doesn't showcase.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function isFeaturedDisplayable(row: any) {
+  return row.status !== "Rusak" && !HIDDEN_CATEGORIES.has(row.kategori_baju);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,7 +77,7 @@ export async function getFeaturedCollectionItems(limit: number): Promise<Collect
       .limit(limit * 2);
     if (error) throw error;
 
-    const featured = (data ?? []).filter(isDisplayable).map(mapRow).slice(0, limit);
+    const featured = (data ?? []).filter(isFeaturedDisplayable).map(mapRow).slice(0, limit);
     if (featured.length > 0) return featured;
   } catch {
     // is_featured / featured_order columns not present yet — fall through to newest items.

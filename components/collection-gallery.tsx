@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { CollectionItem } from "@/lib/types";
 import { statusClass, statusLabel } from "@/lib/status";
 import { ItemModal } from "./item-modal";
+import { SectionHeading } from "./section-heading";
 
 const ALL = "Semua";
 const ITEMS_PER_PAGE = 24;
@@ -51,6 +52,8 @@ export default function CollectionGallery({ items }: { items: CollectionItem[] }
   return (
     <div>
       <div ref={topRef} className="scroll-mt-20" />
+
+      <SectionHeading eyebrow="Jelajahi Semua" title="Semua Koleksi" className="mb-6" />
 
       <div className="sticky top-0 z-30 -mx-4 px-4 py-4 mb-6 bg-[var(--bg)]/95 backdrop-blur border-b border-[var(--border)]">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -108,7 +111,7 @@ export default function CollectionGallery({ items }: { items: CollectionItem[] }
               <button
                 key={item.id}
                 onClick={() => setSelected(item)}
-                className="group text-left rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--bg-card)] shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                className="group text-left rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--bg-card)] hover:border-[var(--gold-light)] hover:shadow-md transition-all duration-200"
               >
                 <div className="relative aspect-[4/5] bg-[var(--gold-soft)] overflow-hidden">
                   {item.fotoBaju ? (

@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   title: "Koleksi Baju — Megumi Beauty Studio",
   description:
     "Jelajahi koleksi gaun, kebaya, busana adat, dan aksesoris rental dari Megumi Beauty Studio.",
+  icons: {
+    icon: "/megumi-logo.png",
+    shortcut: "/megumi-logo.png",
+    apple: "/megumi-logo.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
